@@ -7,6 +7,7 @@ import com.limu.commonutils.R;
 import com.limu.eduservice.entity.EduTeacher;
 import com.limu.eduservice.entity.vo.TeacherQuery;
 import com.limu.eduservice.service.EduTeacherService;
+import com.limu.servicebase.exceptionhandler.GuliException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -15,8 +16,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-import static com.sun.xml.internal.ws.api.model.wsdl.WSDLBoundOperation.ANONYMOUS.required;
 
 /**
  * <p>
@@ -67,6 +66,12 @@ public class EduTeacherController {
     @ApiOperation(value = "分页查询老师")
     @GetMapping("pageTeacher/{current}/{limit}")
     public R pageListTeacher(@PathVariable long current,@PathVariable long limit) {
+
+        try {
+            int i = 10 / 0;
+        } catch (Exception e) {
+            throw new GuliException(20001,"执行自定义异常处理...");
+        }
 
         //创建page对象
         Page<EduTeacher> pageTeacher = new Page<>(current,limit);
