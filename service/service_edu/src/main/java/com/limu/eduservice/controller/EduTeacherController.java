@@ -28,6 +28,7 @@ import java.util.List;
 @Api(description = "老师管理")
 @RestController
 @RequestMapping("/eduservice/teacher")
+@CrossOrigin
 public class EduTeacherController {
 
     //访问地址：http://localhost:8001/eduservice/teacher/findAll
