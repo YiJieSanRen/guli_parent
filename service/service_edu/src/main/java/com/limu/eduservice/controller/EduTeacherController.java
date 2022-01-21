@@ -117,6 +117,9 @@ public class EduTeacherController {
             wrapper.le("gmt_create",end);
         }
 
+        //排序
+        wrapper.orderByDesc("gmt_create");
+
         //调用方法实现条件查询分页
         teacherService.page(pageTeacher,wrapper);
         long total = pageTeacher.getTotal();//总记录数
