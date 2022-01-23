@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * 自定义异常
+ */
 @Data
 @AllArgsConstructor     //生成有参数构造方法
 @NoArgsConstructor      //生成无参数构造方法
