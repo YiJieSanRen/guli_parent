@@ -1,12 +1,15 @@
 package com.limu.demo.excel;
 
 import com.alibaba.excel.EasyExcel;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class TestEasyExcel {
-    public static void main(String[] args) {
+    @Test
+    public void write() {
         //实现excel写的操作
         //1.设置写入文件夹地址和excel文件名称
         String fileName = "C:/data/excel/write.xlsx";
@@ -27,5 +30,13 @@ public class TestEasyExcel {
             list.add(data);
         }
         return list;
+    }
+
+    @Test
+    public void read () {
+        //实现excel读操作
+        String fileName = "C:/data/excel/write.xlsx";
+        EasyExcel.read(fileName,DemoData.class,new ExcelListener()).sheet().doRead();
+
     }
 }
