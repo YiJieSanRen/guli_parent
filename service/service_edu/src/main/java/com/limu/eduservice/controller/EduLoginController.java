@@ -1,8 +1,9 @@
 package com.limu.eduservice.controller;
 
 import com.limu.commonutils.R;
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.*;
-
+@Api(description = "登陆管理")
 @RestController
 @RequestMapping("/eduservice/user")
 @CrossOrigin //解决跨域

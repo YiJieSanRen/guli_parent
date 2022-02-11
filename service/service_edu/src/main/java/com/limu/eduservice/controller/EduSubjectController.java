@@ -2,14 +2,15 @@ package com.limu.eduservice.controller;
 
 
 import com.limu.commonutils.R;
+import com.limu.eduservice.entity.subject.OneSubject;
 import com.limu.eduservice.service.EduSubjectService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 /**
  * <p>
@@ -19,8 +20,9 @@ import org.springframework.web.multipart.MultipartFile;
  * @author testjava
  * @since 2022-01-23
  */
+@Api(description = "课程分类管理")
 @RestController
-@RequestMapping("/eduservice/edu-subject")
+@RequestMapping("/eduservice/subject")
 @CrossOrigin
 public class EduSubjectController {
 
@@ -36,5 +38,14 @@ public class EduSubjectController {
         subjectService.saveSubject(file,subjectService);
         return R.ok();
     }
+
+    //课程分类列表（树形）
+    @GetMapping("getAllSubject")
+    public R getAllSubject() {
+        //list集合泛型是一级分类
+        List<OneSubject> list = subjectService.getAllOneTwoSubject();
+        return R.ok().data("list",list);
+    }
+
 }
 

@@ -68,12 +68,6 @@ public class EduTeacherController {
     @GetMapping("pageTeacher/{current}/{limit}")
     public R pageListTeacher(@PathVariable long current,@PathVariable long limit) {
 
-        try {
-            int i = 10 / 0;
-        } catch (Exception e) {
-            throw new GuliException(20001,"执行自定义异常处理...");
-        }
-
         //创建page对象
         Page<EduTeacher> pageTeacher = new Page<>(current,limit);
         //调用方法实现分页
@@ -127,11 +121,18 @@ public class EduTeacherController {
         return R.ok().data("total",total).data("rows",records);
     }
 
-    //添加老师接口的方法
+    //5.添加老师接口的方法
     @ApiOperation(value = "添加老师")
     @PostMapping("addTeacher")
     public R addTeacher(@RequestBody EduTeacher eduTeacher){
-        boolean save = teacherService.save(eduTeacher);
+        boolean save = false;
+        //判断添加老师信息是否为空
+
+        try {
+            save = teacherService.save(eduTeacher);
+        } catch (Exception e) {
+            throw new GuliException(20001,"添加老师信息失败");
+        }
         if(save) {
             return R.ok();
         }else {
@@ -139,7 +140,7 @@ public class EduTeacherController {
         }
     }
 
-    //根据老师id进行查询
+    //6.根据老师id进行查询
     @ApiOperation(value = "根据ID查询老师")
     @GetMapping("getTeacher/{id}")
     public R getTeacher(@PathVariable String id) {
@@ -147,7 +148,7 @@ public class EduTeacherController {
         return R.ok().data("teacher",eduTeacher);
     }
 
-    //老师修改功能
+    //7.老师修改功能
     @ApiOperation(value = "根据ID修改老师")
     @PostMapping("updateTeacher")
     public R updateTeacher(@ApiParam(name = "teacher", value = "讲师对象", required = true) @RequestBody EduTeacher eduTeacher) {
