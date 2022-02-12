@@ -16,4 +16,6 @@ import java.util.List;
  * @since 2022-02-07
  */
 public interface EduVideoService extends IService<EduVideo> {
+    //根据课程id删除小节
+    void removeVideoByCourseId(String courseId);
 }

@@ -121,5 +121,12 @@ public class EduCourseController {
         return R.ok();
     }
 
+    //删除课程
+    @DeleteMapping("{courseId}")
+    public R deleteCourse(@PathVariable String courseId) {
+        courseService.removeCourse(courseId);
+        return R.ok();
+    }
+
 }
 
