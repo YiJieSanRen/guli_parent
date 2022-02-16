@@ -6,6 +6,7 @@ import com.limu.eduservice.client.VodClient;
 import com.limu.eduservice.entity.EduChapter;
 import com.limu.eduservice.entity.EduVideo;
 import com.limu.eduservice.service.EduVideoService;
+import com.limu.servicebase.exceptionhandler.GuliException;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
@@ -48,7 +49,10 @@ public class EduVideoController {
         //判断小节里面是否有视频id
         if(!StringUtils.isEmpty(videoSourceId)) {
             //根据视频id，远程调用实现视频删除
-            vodClient.removeAlyVideo(videoSourceId);
+            R result = vodClient.removeAlyVideo(videoSourceId);
+            if (result.getCode() == 20001){
+                throw new GuliException(20001,"删除视频失败...");
+            }
         }
         //删除小节
         videoService.removeById(id);
