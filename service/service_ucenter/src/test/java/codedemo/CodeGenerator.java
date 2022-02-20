@@ -26,7 +26,7 @@ public class CodeGenerator {
         // 2、全局配置
         GlobalConfig gc = new GlobalConfig();
         //String projectPath = System.getProperty("user.dir");
-        gc.setOutputDir("C:\\Users\\14020\\IdeaProjects\\guli_parent\\service\\service_cms" + "/src/main/java");
+        gc.setOutputDir("C:\\Users\\14020\\IdeaProjects\\guli_parent\\service\\service_ucenter" + "/src/main/java");
 
         gc.setAuthor("limu");
         gc.setOpen(false); //生成后是否打开资源管理器
@@ -52,7 +52,7 @@ public class CodeGenerator {
 
         //包 com.limu.eduservice
         pc.setParent("com.limu");
-        pc.setModuleName("educms"); //模块名
+        pc.setModuleName("educenter"); //模块名
 
         //包 com.limu.eduservice.controller
         pc.setController("controller");
@@ -64,7 +64,7 @@ public class CodeGenerator {
         // 5、策略配置
         StrategyConfig strategy = new StrategyConfig();
 
-        strategy.setInclude("crm_banner");//多表时："edu_teacher","edu_student",""
+        strategy.setInclude("ucenter_member");//多表时："edu_teacher","edu_student",""
 
         strategy.setNaming(NamingStrategy.underline_to_camel);//数据库表映射到实体的命名策略
         strategy.setTablePrefix(pc.getModuleName() + "_"); //生成实体时去掉表前缀

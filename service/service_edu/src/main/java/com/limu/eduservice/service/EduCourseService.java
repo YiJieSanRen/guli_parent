@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.limu.eduservice.entity.vo.CourseInfoVo;
 import com.limu.eduservice.entity.vo.CoursePublishVo;
 
+import java.util.List;
+
 /**
  * <p>
  * 课程 服务类
@@ -29,4 +31,7 @@ public interface EduCourseService extends IService<EduCourse> {
 
     //删除课程
     void removeCourse(String courseId);
+
+    //查询热门课程
+    List<EduCourse> queryHotCourses();
 }

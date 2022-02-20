@@ -1,5 +1,6 @@
 package com.limu.eduservice.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.limu.eduservice.entity.EduCourse;
 import com.limu.eduservice.entity.EduCourseDescription;
 import com.limu.eduservice.entity.vo.CourseInfoVo;
@@ -13,8 +14,11 @@ import com.limu.eduservice.service.EduVideoService;
 import com.limu.servicebase.exceptionhandler.GuliException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * <p>
@@ -132,5 +136,16 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
             throw new GuliException(20001,"删除失败!");
         }
 
+    }
+
+    //查询热门课程
+    @Cacheable(value = "course",key = "'selectIndexList'")
+    @Override
+    public List<EduCourse> queryHotCourses() {
+        QueryWrapper<EduCourse> wrapper = new QueryWrapper<>();
+        wrapper.orderByDesc("view_count");
+        wrapper.last("limit 8");
+        List<EduCourse> courseList = baseMapper.selectList(wrapper);
+        return courseList;
     }
 }
