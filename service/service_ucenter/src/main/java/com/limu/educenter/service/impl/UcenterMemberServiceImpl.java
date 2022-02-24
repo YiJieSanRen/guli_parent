@@ -11,6 +11,7 @@ import com.limu.educenter.service.UcenterMemberService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.limu.servicebase.exceptionhandler.GuliException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -126,11 +127,18 @@ public class UcenterMemberServiceImpl extends ServiceImpl<UcenterMemberMapper, U
         return member;
     }
 
+    //根据giteeid判断
     @Override
     public UcenterMember getGiteeidMember(String giteeId) {
         QueryWrapper<UcenterMember> wrapper = new QueryWrapper<>();
         wrapper.eq("giteeid",giteeId);
         UcenterMember member = baseMapper.selectOne(wrapper);
         return member;
+    }
+
+    //查询某天的注册人数
+    @Override
+    public Integer countRegisterDay(String day) {
+        return baseMapper.countRegisterDay(day);
     }
 }

@@ -3,11 +3,13 @@ package com.limu.educenter.controller;
 
 import com.limu.commonutils.JwtUtils;
 import com.limu.commonutils.R;
+import com.limu.commonutils.ordervo.UcenterMemberOrder;
 import com.limu.educenter.entity.UcenterMember;
 import com.limu.educenter.entity.vo.LoginVo;
 import com.limu.educenter.entity.vo.RegisterVo;
 import com.limu.educenter.service.UcenterMemberService;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -56,6 +58,30 @@ public class UcenterMemberController {
         //查询数据库根据用户id获取用户信息
         UcenterMember member = memberService.getById(memberId);
         return R.ok().data("userInfo",member);
+    }
+
+    //根据用户id获取用户信息
+    @PostMapping("getUserInfoOrder/{id}")
+    public UcenterMemberOrder getUserInfoOrder(@PathVariable String id) {
+        UcenterMember member = memberService.getById(id);
+        //把member对象里面的值复制给UcenterMemberOrder对象
+        UcenterMemberOrder ucenterMemberOrder = new UcenterMemberOrder();
+        BeanUtils.copyProperties(member,ucenterMemberOrder);
+        return ucenterMemberOrder;
+    }
+
+    //查询某天的注册人数
+    @GetMapping("countRegister/{day}")
+    public R coutRegister(@PathVariable String day) {
+        Integer count = memberService.countRegisterDay(day);
+        return R.ok().data("countRegister",count);
+    }
+
+    //查询某天的登录人数
+    @GetMapping("countLogin/{day}")
+    public R coutLogin(@PathVariable String day) {
+        Integer count = memberService.countRegisterDay(day);
+        return R.ok().data("countLogin",count);
     }
 }
 

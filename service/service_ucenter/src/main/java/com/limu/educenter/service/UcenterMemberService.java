@@ -26,4 +26,7 @@ public interface UcenterMemberService extends IService<UcenterMember> {
 
     //根据giteeid判断
     UcenterMember getGiteeidMember(String giteeId);
+
+    //查询某天的注册人数
+    Integer countRegisterDay(String day);
 }
