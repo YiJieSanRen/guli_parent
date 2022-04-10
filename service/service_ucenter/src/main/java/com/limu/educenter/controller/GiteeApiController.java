@@ -22,7 +22,7 @@ import java.util.HashMap;
 
 @Controller
 @RequestMapping("/api/ucenter/gitee")
-@CrossOrigin
+//@CrossOrigin
 public class GiteeApiController {
 
     @Autowired

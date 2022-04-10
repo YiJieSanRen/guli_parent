@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @EnableDiscoveryClient //nacos注册
-@ComponentScan({"com.limu"})
+@ComponentScan(basePackages = {"com.limu"})
 @MapperScan("com.limu.educms.mapper")
 public class CmsApplication {
     public static void main(String[] args) {

@@ -13,7 +13,7 @@ import java.util.HashMap;
 
 @Controller
 @RequestMapping("/api/ucenter/github")
-@CrossOrigin
+//@CrossOrigin
 public class GitHubApiController {
 
     //请求用户的 GitHub 身份

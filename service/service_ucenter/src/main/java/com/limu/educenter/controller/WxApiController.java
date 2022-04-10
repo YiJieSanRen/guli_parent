@@ -19,7 +19,6 @@ import java.util.HashMap;
 
 @Controller
 @RequestMapping("/api/ucenter/wx")
-@CrossOrigin
 public class WxApiController {
 
     @Autowired
